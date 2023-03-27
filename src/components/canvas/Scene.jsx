@@ -1,8 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload, Html, Environment, Cloud } from '@react-three/drei'
-import Gates from './Background/Gates'
-import Clouds from './Background/Clouds'
-import Sparklers from './Background/Sparklers'
+import Ground from './Background/Ground'
 import { useState } from 'react'
 
 export default function Scene({ children, ...props }) {
@@ -16,25 +14,10 @@ export default function Scene({ children, ...props }) {
       <ambientLight intensity={0.15} />
       {children}
       <Preload all />
-      <Environment preset={'night'}></Environment>
-      <fog attach='fog' color='#18181b' near={12} far={69} />
       <color attach='background' args={['#18181b']} />
-      {initialTransition ? null : (
-        <Html>
-          <div
-            style={{ color: 'black', border: '2px black solid', width: '100px', cursor: 'pointer' }}
-            onClick={() => {
-              setInitialTransition(true)
-            }}>
-            Click to enter
-          </div>
-        </Html>
-      )}
-
       <OrbitControls />
-      <Clouds initialTransition={initialTransition}></Clouds>
-      <Gates initialTransition={initialTransition}></Gates>
-      {/* <Sparklers initialTransition={initialTransition}></Sparklers> */}
+
+      <Ground></Ground>
     </Canvas>
   )
 }
